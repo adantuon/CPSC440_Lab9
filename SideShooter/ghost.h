@@ -1,3 +1,5 @@
+//Aiden D'Antuono
+
 #ifndef GHOSTH
 #define GHOSTH
 #include "player.h"
