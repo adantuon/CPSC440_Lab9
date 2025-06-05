@@ -36,7 +36,7 @@ void ghost::Startghost(int WIDTH, int HEIGHT )
 		{
 			live = true;
 			x = WIDTH;
-			y = rand() % (HEIGHT-boundy);
+			y = rand() % (HEIGHT-boundy - 25);
 
 		}
 	}
