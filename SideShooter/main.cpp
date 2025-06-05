@@ -170,7 +170,7 @@ int main(void)
 			al_clear_to_color(al_map_rgb(0,0,0));
 		}
 
-		if (myPlayer.getLives() < 0) {
+		if (myPlayer.getLives() < 1) {
 			//Wait until 5 seconds have passed then stop the game
 			time_t startTime = time(NULL);
 			time_t currentTime = time(NULL);
