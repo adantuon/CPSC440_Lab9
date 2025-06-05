@@ -6,6 +6,7 @@
 #include "player.h"
 #include "ghost.h"
 #include "Arrow.h"
+#include <cstdlib>
 
 int main(void)
 {
@@ -168,6 +169,19 @@ int main(void)
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0,0,0));
 		}
+
+		if (myPlayer.getLives() < 0) {
+			//Wait until 5 seconds have passed then stop the game
+			time_t startTime = time(NULL);
+			time_t currentTime = time(NULL);
+			
+			while ((currentTime - startTime) < 5.0) {
+				currentTime = time(NULL);
+			}
+
+			done = true;
+		}
+
 	}
 
 	al_destroy_event_queue(event_queue);
