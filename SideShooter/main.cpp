@@ -51,6 +51,10 @@ int main(void)
 	if (font == NULL) {
 		return(-1);
 	}
+	ALLEGRO_FONT *bigFont = al_load_font("PressStart2P.ttf", 36, 0);
+	if (bigFont == NULL) {
+		return(-1);
+	}
 
 	al_install_keyboard();
 	al_init_image_addon();
@@ -171,6 +175,12 @@ int main(void)
 		}
 
 		if (myPlayer.getLives() < 1) {
+
+			//Display game over screen
+			al_draw_textf(bigFont, al_map_rgb(255, 0, 0), WIDTH / 2, HEIGHT / 2 - 36, ALLEGRO_ALIGN_CENTER, "GAME OVER");
+			al_draw_textf(font, al_map_rgb(255, 255, 255), WIDTH / 2, HEIGHT / 2 + 12, ALLEGRO_ALIGN_CENTER, "Final Score: %i", myPlayer.getScore());
+			al_flip_display();
+
 			//Wait until 5 seconds have passed then stop the game
 			time_t startTime = time(NULL);
 			time_t currentTime = time(NULL);
