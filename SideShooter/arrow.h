@@ -9,7 +9,7 @@ public:
 	void DrawArrow();
 	void FireArrow(player &Player);
 	void UpdateArrow(int WIDTH);
-	void CollideArrow(ghost ghosts[], int cSize);
+	void CollideArrow(ghost ghosts[], int cSize, player &Player);
 private:
 	int x;
 	int y;

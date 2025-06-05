@@ -1,6 +1,8 @@
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_primitives.h>
 #include <allegro5\allegro_image.h>
+#include <allegro5\allegro_font.h>
+#include <allegro5\allegro_ttf.h>
 #include "player.h"
 #include "ghost.h"
 #include "Arrow.h"
@@ -35,6 +37,19 @@ int main(void)
 
 	if(!display)										//test display object
 		return -1;
+
+	if (!al_init_font_addon()) {
+		return -1;
+	}
+
+	if (!al_init_ttf_addon()) {
+		return -1;
+	}
+
+	ALLEGRO_FONT *font = al_load_font("PressStart2P.ttf", 12, 0);
+	if (font == NULL) {
+		return(-1);
+	}
 
 	al_install_keyboard();
 	al_init_image_addon();
@@ -78,7 +93,7 @@ int main(void)
 			for(int i=0;i<NUM_ghostS;i++)
 				ghosts[i].Updateghost();
 			for(int i=0;i<NUM_ArrowS;i++)
-				Arrows[i].CollideArrow(ghosts, NUM_ghostS);
+				Arrows[i].CollideArrow(ghosts, NUM_ghostS, myPlayer);
 			for(int i=0;i<NUM_ghostS;i++)
 				ghosts[i].Collideghost(myPlayer);
 		}
@@ -146,6 +161,9 @@ int main(void)
 				Arrows[i].DrawArrow();
 			for(int i=0;i<NUM_ghostS;i++)
 				ghosts[i].Drawghost();
+
+			al_draw_textf(font, al_map_rgb(255, 255, 255), 8, HEIGHT - 18, ALLEGRO_ALIGN_LEFT, "Lives: %i", myPlayer.getLives());
+			al_draw_textf(font, al_map_rgb(255, 255, 255), 150, HEIGHT - 18, ALLEGRO_ALIGN_LEFT, "Score: %i", myPlayer.getScore());
 
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0,0,0));
